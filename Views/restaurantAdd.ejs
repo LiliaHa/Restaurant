@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Restaurant</title>
+    <meta name="description" content="Restaurant">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="page-add">
+        <header>
+            <div class="topnav">
+                <a href="/type">Type de cuisine</a>
+                <a href="/restaurant/add" class="active"> Nouveau restaurant</a>
+                <a href="/"> Accueil</a>
+            </div>
+        </header>
+        <div class="form-add">
+            <div class="container-add">
+                <h1 class="add-form-title">Ajouter un restaurant</h1>
+                <form action="/restaurant/new" method="POST">
+                    <div>
+                        <label for="nom">Nom du restaurant :</label>
+                        <input type="text" id="nom" name="nom" value="<%= nom %>" required>
+                    </div>
+                    <div>
+                        <label for="rue">Nom de la rue :</label>
+                        <input type="text" id="rue" name="rue" value="<%= rue %>" required>
+                    </div>
+                    <div>
+                        <label for="numero">Numéro :</label>
+                        <input type="number" id="numero" name="numero" value="<%= numero %>" required>
+                    </div>
+                    <div>
+                        <label for="numero">Commune :</label>
+                        <input type="text" id="commune" name="commune" value="<%= commune %>" required>
+                    </div>
+                    <div>
+                        <label for="codepostal">Code postale :</label>
+                        <input type="number" id="codepostal" name="codepostal" value="<%= codepostal %>" required>
+                    </div>
+                    
+                    <div>
+                        <label for="type">Type de Cuisine :</label>
+                        <select name="type">
+                            <% for (let i = 0 ;  i < typesList.length ; i++) { %>
+                            <option value="<%= typesList[i].idType%>"><%= typesList[i].Cuisine %></option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 50px;">
+                        <label for="tarif">Tarif :</label>
+                        <select name="tarif">
+                            <option>€</option>
+                            <option>€€</option>
+                            <option>€€€</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="idrestaurant" value="<%= idrestaurant %>">
+                    <input type="hidden" name="idadresse" value="<%= idadresse %>">
+                    <div class="buttons">
+                        <button class="button button-add" type="submit">Sauver</button>
+                        <button class="button button-cancel" onclick="location.href='/';">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

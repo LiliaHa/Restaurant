@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Restaurant</title>
+        <meta name="description" content="Restaurant">
+        <link rel="stylesheet" href="/css/style.css">
+
+        
+    </head>
+
+    <script>
+        // ref :
+        // https://stackoverflow.com/a/5416823
+        function val() {
+            d = document.getElementById("select-type").value;
+            if(d == "all"){
+                // on redirige vers l'accueil par defaut
+                window.location.href = 'http://localhost:8000/restaurant/';
+            } else{
+                // sinon on redirige vers la route qui filtre sur base de l'id d'un type
+                window.location.href = 'http://localhost:8000/restaurant/filtrer/'+d;
+            }
+        }
+    </script>
+
+    <body>  
+
+        <header>
+            <div class="topnav">
+                <a href="/type">Type de cuisine</a>
+                <a href="/restaurant/add"> Nouveau restaurant</a>
+                <a class="active" href="/">Accueil</a>
+            </div>
+        </header>
+        <div class="banner">
+            <h1>Bienvenue sur Brussels Restaurants</h1>
+            <p>
+                   Vous trouverez sur ce site une liste des restaurants de Bruxelles.<br>
+                        N'hesitez pas à rajouter vos restaurants favoris !<br>                          
+                Si vous ne trouvez pas votre type de cuisine n'hésitez pas à la rajouter.
+            </p>
+        </div>
+
+        <div class="trie">
+            <label for="select-type">Type de Cuisine :</label>
+             <!-- ref : https://stackoverflow.com/a/5416823 -->
+            <select onchange="val()" id="select-type" name="select-type">
+                <option value="-1"></option>
+                <option value="all"> Tous les types</option>
+                <% for (let i = 0 ;  i < typesList.length ; i++) { %>
+                <option value="<%= typesList[i].idType%>"><%= typesList[i].Cuisine %></option>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="cards">
+            
+            <% for (let i = 0 ;  i < restaurants.length ; i++) { %>
+            <div class="card">
+                <h2 style="text-align: center; "> <%= restaurants[i].nom%> </h2>
+                <div>
+                    <img src="/images/resto.jpg" alt="restaurants-image" style="width: 45%">
+                    <span class="tarif"><%= restaurants[i].Tarif %></span>
+                </div>
+                <div class="container">
+                    <h4>Adresse</h4>
+                    <%= restaurants[i].rue %> 
+                    <%= restaurants[i].numero %>,
+                    <%= restaurants[i].codepostal %> 
+                    <%= restaurants[i].commune %> 
+                    <h5> type : <%= restaurants[i].Cuisine %>  </h5>
+                    <div class="buttons">
+                        <a href="/restaurant/update/<%= restaurants[i].idRestaurant %>/<%= restaurants[i].idAdresse %>">Modifier</a> 
+                        <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer le restaurant <%= restaurants[i].nom%> ?');" href="/restaurant/delete/<%= restaurants[i].idRestaurant %>/<%= restaurants[i].idAdresse %>">Effacer</a>
+                    </div>
+                </div>
+            </div> 
+            <% } %>
+        </div>
+
+    </body>  
+
+</html>

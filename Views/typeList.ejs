@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Restaurant</title>
+        <meta name="description" content="Restaurant">
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+
+    <body>  
+
+        <header>
+            <div class="topnav">
+                <a href="/type" class="active">Type de cuisine</a>
+                <a href="/restaurant/add"> Nouveau restaurant</a>
+                <a href="/">Accueil</a>
+            </div>
+        </header>
+    
+        <table>
+            <tr>
+                <th>Nom du Type</th>
+                <th>Actions</th>
+            </tr>
+
+            <% for (let i = 0 ;  i < types.length ; i++) { %>
+                <tr>
+                    <td>
+                        <h3> <%= types[i].Cuisine%> </h3>
+                    </td>
+                    <td>
+                        <div>
+                            <a href="/type/update/<%= types[i].idType %>">Modifier</a> 
+                            <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer le type <%= types[i].Cuisine%> ?');" href="/type/delete/<%= types[i].idType %>">Effacer</a>
+                        </div>
+                    </td>
+                </tr>
+                    <% } %>
+
+        </table>
+
+        <div style="width:50%; margin:auto">
+            <form action="/type/new" method="POST">
+                <div>
+                    <label for="nom">Nom du type :</label>
+                    <input type="text" id="nom" name="nom" value="<%= nom %>" required>
+                </div>
+                <div>
+                    <input type="hidden" name="idtype" value="<%= idtype %>">
+                    <div class="buttons">
+                        <button class="button button-add" type="submit">Sauver</button>
+                        <button class="button button-cancel" onclick="location.href='/type';">Annuler</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>  
+
+</html>
