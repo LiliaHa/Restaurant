@@ -22,6 +22,25 @@ exports.restaurantList = function (req, res)
     });
 }
 
+exports.restaurantListTrier = function (req, res)
+
+{   
+    let idtype= req.params.idtype;
+    var sql = "SELECT * FROM restaurant JOIN adresse ON restaurant.adresse = adresse.idAdresse JOIN type on restaurant.TypeDeCuisine = type.idType WHERE TypeDeCuisine = ?";
+    connection.query(sql,[idtype],function (error, resultSQL) {
+        if (error)  {
+            res.status(400).json({'message': error});        
+        }
+        else {
+            res.status(200);
+            restaurantList = resultSQL;
+            console.log(restaurantList);
+
+            res.json({restaurants:restaurantList});
+        }
+    });
+}
+
 exports.getRestaurant = function (req, res)
 
 {   

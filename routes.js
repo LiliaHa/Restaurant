@@ -19,7 +19,6 @@ router.get('/restaurant/update/:idrestaurant/:idadresse', restaurantController.r
 router.get('/restaurant/delete/:idrestaurant/:idadresse', restaurantController.restaurantRemove); // :idrestaurant = parametre 
 
 router.get('/type', typeController.typeList);
-// router.get('/type/add', typeController.typeFormAdd);
 router.post('/type/new', typeController.typeNew);
 router.get('/type/update/:idtype/', typeController.typeFormUpdate);
 router.get('/type/delete/:idtype/', typeController.typeRemove); // :idtype = parametre 
@@ -27,6 +26,7 @@ router.get('/type/delete/:idtype/', typeController.typeRemove); // :idtype = par
 // API ROUTES -- Restaurant
 router.get('/api/restaurant/list',restaurantControllerApi.restaurantList);
 router.get('/api/restaurant/:idrestaurant',restaurantControllerApi.getRestaurant);
+router.get('/api/restaurant/filtrer/:idtype', restaurantControllerApi.restaurantListTrier);
 router.post('/api/restaurant/add',restaurantControllerApi.restaurantNew);
 router.put('/api/restaurant/update/:idrestaurant',restaurantControllerApi.restaurantUpdate);
 router.delete('/api/restaurant/delete/:idrestaurant',restaurantControllerApi.restaurantRemove);
