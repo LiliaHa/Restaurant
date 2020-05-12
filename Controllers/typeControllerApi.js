@@ -69,14 +69,23 @@ exports.typeUpdate =  function(req, res) // request, response
 
 exports.typeRemove = function (req, res) {
     let idtype = req.params.idtype;
+    
+    let sql = "DELETE FROM Restaurant WHERE TypeDeCuisine = ?";    
     let sqltype = "DELETE FROM type WHERE idtype = ?";
-    connection.query(sqltype, [idtype], function(error,resultSQL){
-        if(error){
-            res.status(400).json({'message':error});
-        } else{
-            res.status(202).json({'message':'Delete success'});
-        }
-    });
+    
+    connection.query(sql, [idType], function(error,resultSQL){
+    if(error){
+        res.status(400).json({'message':error});
+    } else{
+        connection.query(sqlType, [idType], function(error,resultSQL){
+            if(error){
+                res.status(400).json({'message':error});
+            } else{
+                res.status(202).json({'message':'Delete success'});
+            }
+        });
+    }
+});
 }
 
     
