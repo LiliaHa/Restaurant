@@ -17,7 +17,7 @@ exports.restaurantList = function (req, res)
             restaurantList = resultSQL;
             console.log(restaurantList);
 
-            res.json({restaurantList});
+            res.json(restaurantList);
         }
     });
 }
@@ -36,7 +36,7 @@ exports.restaurantListTrier = function (req, res)
             restaurantList = resultSQL;
             console.log(restaurantList);
 
-            res.json({restaurantList});
+            res.json(restaurantList);
         }
     });
 }
@@ -57,7 +57,7 @@ exports.getRestaurant = function (req, res)
         else {
             res.status(200);
             let restaurant = resultSQL[0];
-            res.json({restaurant});
+            res.json(restaurant);
         }
     });
 }
