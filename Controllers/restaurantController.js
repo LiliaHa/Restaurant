@@ -3,7 +3,7 @@ let Adresse = require('../models/adresseModel');
 let connection = require('../db');
 let restaurantList = [];
 
-// List of restaurants
+// Generer la page 
 exports.restaurantList = function (req, res)
 
 {    
@@ -18,7 +18,7 @@ exports.restaurantList = function (req, res)
             typeList = resultSQL;
         }
     });
-    //requete par defaut
+    //requete pur récuperer la liste des restaurants avec l'adresse et le type (jointure)
     var sqlDefaut = "SELECT * FROM restaurant JOIN adresse ON restaurant.adresse = adresse.idAdresse JOIN type on restaurant.TypeDeCuisine = type.idType";
     
     connection.query(sqlDefaut,function (error, resultSQL) {
@@ -88,6 +88,7 @@ exports.restaurantNew =  function(req, res) { // request, response
             if(error){
                 res.status(400).send(error);
             } else{
+                //insertId => recupere l'ID de la derniere rangé inserer dans la base de donnée
                 adresse = resultSQL.insertId;
                 let restaurantClass = new Restaurant(nom,adresse,typedecuisine,tarif);
                 var sql = "INSERT INTO Restaurant set ?";
@@ -144,6 +145,7 @@ exports.restaurantFormUpdate = function (req, res) {
     let idadresse = req.params.idadresse;
     // Equivalent en SQL => SELECT * FROM restaurant JOIN adresse ON 
     // restaurant.adresse = adresse.idAdresse where idrestaurant = req.params.idrestaurant;
+    //Pour aller chercher ds la liste, le resto à modifier sur base de son ID
     let restaurant = restaurantList.find(resto => resto.idRestaurant == idrestaurant); 
 
     let typeList;

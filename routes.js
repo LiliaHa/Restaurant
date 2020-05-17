@@ -31,7 +31,7 @@ router.post('/api/restaurant/add',restaurantControllerApi.restaurantNew);
 router.put('/api/restaurant/update/:idrestaurant',restaurantControllerApi.restaurantUpdate);
 router.delete('/api/restaurant/delete/:idrestaurant',restaurantControllerApi.restaurantRemove);
 
-//-- Type
+// API ROUTES-- Type
 router.get('/api/type/list',typeControllerApi.typeList);
 router.get('/api/type/:idtype',typeControllerApi.getType);
 router.post('/api/type/add',typeControllerApi.typeNew);
