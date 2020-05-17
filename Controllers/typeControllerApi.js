@@ -15,7 +15,7 @@ exports.typeList = function (req, res)
             typeList = resultSQL;
             console.log(typeList);
 
-            res.json({types:typeList});
+            res.json(typeList);
         }
     });
 }
@@ -31,14 +31,14 @@ exports.getType = function (req, res)
         }
         else {
             res.status(200);
-            res.json({type:resultSQL[0]});
+            res.json(resultSQL[0]);
         }
     });
 }
 
 
 exports.typeNew =  function(req, res) { // request, response
-    let cuisine = req.body.cuisine;
+    let cuisine = req.body.Cuisine;
     
     var sql = "INSERT INTO type (cuisine) VALUES (?)";
     connection.query(sql,[cuisine],function(error,resultSQL){
@@ -54,7 +54,7 @@ exports.typeNew =  function(req, res) { // request, response
 exports.typeUpdate =  function(req, res) // request, response 
 {  
     let idtype = req.params.idtype;
-    let cuisine = req.body.cuisine;
+    let cuisine = req.body.Cuisine;
 
     var sql = "UPDATE type set cuisine = ? WHERE idType = ?";
     connection.query(sql, [cuisine,idtype], function(error,resultSQL){
@@ -73,11 +73,11 @@ exports.typeRemove = function (req, res) {
     let sql = "DELETE FROM Restaurant WHERE TypeDeCuisine = ?";    
     let sqltype = "DELETE FROM type WHERE idtype = ?";
     
-    connection.query(sql, [idType], function(error,resultSQL){
+    connection.query(sql, [idtype], function(error,resultSQL){
     if(error){
         res.status(400).json({'message':error});
     } else{
-        connection.query(sqlType, [idType], function(error,resultSQL){
+        connection.query(sqltype, [idtype], function(error,resultSQL){
             if(error){
                 res.status(400).json({'message':error});
             } else{

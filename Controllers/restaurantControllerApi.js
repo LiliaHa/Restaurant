@@ -106,8 +106,8 @@ exports.restaurantUpdate =  function(req, res) { // request, response
     let numero = req.body.numero;
     let commune = req.body.commune;
     let codepostal = req.body.codepostal;
-    let tarif = req.body.tarif;
-    let adresse = req.body.adresse;
+    let tarif = req.body.Tarif;
+    let adresse = req.body.Adresse;
     
     let adresseClass = new Adresse(rue,numero,codepostal,commune);
     var sql = "UPDATE Adresse set ? WHERE idAdresse = ?";
